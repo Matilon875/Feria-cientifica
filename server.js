@@ -42,10 +42,14 @@ app.post("/chat", async (req, res) => {
     });
 
   } catch (error) {
+    console.error(error);
     res.status(500).json({ reply: "Error en la API" });
   }
 });
 
-app.listen(3000, () => {
-  console.log("Servidor listo");
+// ✅ FIX IMPORTANTE PARA RENDER
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log("Servidor listo en puerto " + port);
 });
