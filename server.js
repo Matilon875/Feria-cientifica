@@ -16,21 +16,22 @@ const openai = new OpenAI({
 app.post("/chat", async (req, res) => {
   const { message, npc } = req.body;
 
-  let systemPrompt = "Responde de forma educativa.";
+  let systemPrompt = "Responde de forma educativa. Máximo 3-5 frases.";
 
   if (npc === "pasado") {
-    systemPrompt = "Eres una representación histórica del contexto alemán de 1930. Responde de forma objetiva.";
+    systemPrompt = "Eres una representación histórica del contexto alemán de 1930. Responde de forma objetiva. Máximo 3-5 frases.";
   } 
   else if (npc === "presente") {
-    systemPrompt = "Eres un analista político actual. Explica la ultraderecha moderna de forma objetiva.";
+    systemPrompt = "Eres un analista político actual. Explica la ultraderecha moderna de forma objetiva. Máximo 3-5 frases.";
   } 
   else if (npc === "futuro") {
-    systemPrompt = "Habla sobre posibles futuros políticos de forma educativa.";
+    systemPrompt = "Habla sobre posibles futuros políticos de forma educativa. Máximo 3-5 frases.";
   }
 
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-5-mini",
+      max_tokens: 220, // 🔥 IMPORTANTE: rápido + barato
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: message }
@@ -47,7 +48,7 @@ app.post("/chat", async (req, res) => {
   }
 });
 
-// ✅ FIX IMPORTANTE PARA RENDER
+// ✅ FIX RENDER
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
