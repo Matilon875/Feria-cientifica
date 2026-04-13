@@ -16,10 +16,10 @@ const openai = new OpenAI({
 app.post("/chat", async (req, res) => {
   const { message, npc } = req.body;
 
-  let systemPrompt = "Responde de forma educativa. Máximo 3-5 frases.";
+  let systemPrompt = "Responde de forma educativa y objetiva. Máximo 3-5 frases.";
 
   if (npc === "pasado") {
-    systemPrompt = "Eres una representación histórica del contexto alemán de 1930. Responde de forma objetiva. Máximo 3-5 frases.";
+    systemPrompt = "Eres un NPC educativo que explica el fascismo de forma objetiva, neutral e histórica. Responde de manera clara, basada en hechos, sin opiniones ni propaganda, y con enfoque académico. Máximo 3-5 frases.";
   } 
   else if (npc === "presente") {
     systemPrompt = "Eres un analista político actual. Explica la ultraderecha moderna de forma objetiva. Máximo 3-5 frases.";
